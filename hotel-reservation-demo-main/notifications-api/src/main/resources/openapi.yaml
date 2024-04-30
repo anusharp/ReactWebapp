@@ -1,0 +1,68 @@
+openapi: 3.0.0
+info:
+  title: Email Sending API
+  description: API for sending emails through Azure Communication Services
+  version: "1.0"
+servers:
+  - url: "{server}:{port}/notifications"
+    description: Base server URL for Email API
+    variables:
+      server:
+        default: http://localhost
+        description: Base server URL
+      port:
+        default: "8080"
+        description: The port on which the server is running
+        enum:
+          - "8080"
+tags:
+  - name: Email
+    description: Operations related to sending emails
+paths:
+  /send-email:
+    post:
+      tags:
+        - Email
+      summary: Send an email
+      description: Sends an email to the specified recipient with a subject and body.
+      requestBody:
+        description: Email request details
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmailRequest'
+      responses:
+        '200':
+          description: Email sent successfully
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: email sent successfully
+        '400':
+          description: Bad request when the request body is not correctly formed
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    EmailRequest:
+      description: Email request details
+      type: object
+      required:
+        - recipient
+        - subject
+        - body
+      properties:
+        recipient:
+          type: string
+          description: The recipient's email address
+          example: jane.doe@example.com
+        subject:
+          type: string
+          description: The email subject
+          example: Hello World
+        body:
+          type: string
+          description: The plain text email body
+          example: This is a test email.

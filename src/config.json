@@ -1,0 +1,7 @@
+{
+    "clientID": "L5qe8ou411yKp5AxwD3SP6fsFuQa",
+    "baseUrl": "https://api.asgardeo.io/t/anusharp",
+    "signInRedirectURL": "http://localhost:3000",
+    "signOutRedirectURL": "http://localhost:3000",
+    "scope": ["profile"]
+}
